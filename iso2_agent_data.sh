@@ -10,6 +10,19 @@
 
 source appliance_config.sh
 
+# create cat imageset-config.yaml
+read -r -d '' imageset-config << EOL
+apiVersion: mirror.openshift.io/v1alpha2
+kind: ImageSetConfiguration
+mirror:
+  platform:
+    channels:
+      - name: stable-4.12
+        minVersion: 4.12.6
+        maxVersion: 4.12.6
+  additionalImages:
+    - name: registry.redhat.io/ubi8/ubi:latest
+EOL
 
 function iso2_generator_main() {
   func_name=${FUNCNAME[0]}
@@ -35,6 +48,17 @@ function iso2_generator_main() {
   skopeo copy --all docker://"$ASSISTED_INSTALLER_AGENT_IMAGE" dir:"$POC_DIR"/assets/images/ose-agent-installer-node-agent
   log_info "${func_name}" "Copy (via skopeo) assisted-service: $ASSISTED_INSTALLER_AGENT_IMAGE to $POC_DIR/assets/images/ose-agent-installer-api-server"
   skopeo copy --all docker://"$ASSISTED_SERVICE_IMAGE" dir:"$POC_DIR"/assets/images/ose-agent-installer-api-server
+
+  log_info "${func_name}" "Generating imageset-config.yaml at $POC_DIR/assets/"
+  echo "${imageset-config}" > "$POC_DIR"/assets/imageset-config.yaml
+  pushd "$POC_DIR" || exit 1
+  pushd assets/ || exit 1
+  log_info "${func_name}" "Copy mirror_seq1_000000.tar  to oc-mirror directory"
+  cp archives/mirror_seq1_000000.tar ./oc-mirror
+  popd || exit 1
+  log_info "${func_name}" "Run genisoimage on agent.data.iso"
+  genisoimage -o agent.data.iso -allow-limited-size assets
+  log_info "${func_name}" "Done generating $POC_DIR/agent.data.iso"
 }
 
 log_info iso1_generator "iso2_generator start"
