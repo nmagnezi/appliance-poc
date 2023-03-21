@@ -24,7 +24,7 @@ coreos-installer iso customize \
   -o $POC_DIR/agent.config.iso \
   ~/.cache/agent/image_cache/coreos-x86_64.iso
 
-echo "Done"
+echo "Done generating agent.config.iso"
 EOL
 
 
@@ -33,7 +33,7 @@ EOL
 read -r -d '' create_ign << EOL
 #!/usr/bin/env bash
 
-SSH_PUB_KEY=$(cat ~/.ssh/id_rsa.pub)
+SSH_PUB_KEY='$(cat ~/.ssh/id_rsa.pub)'
 
 butane --pretty --strict --files-dir .  << EOF > config.ign
 variant: fcos
