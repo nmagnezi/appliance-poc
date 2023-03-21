@@ -101,6 +101,21 @@ function iso3_generator_main() {
 
   log_info "${func_name}" "Generating install-config.yaml at $POC_DIR/appliance/"
   echo "${install_config}" > "$POC_DIR"/appliance/install-config.yaml
+  log_info "${func_name}" "Running: openshift-install agent create image"
+  openshift-install agent create image
+  log_info "${func_name}" "Extracting image config"
+  7z x agent.x86_64.iso -oextracted -y
+  pushd extracted || exit 1
+  log_info "${func_name}" "Embedding and enabling local-registry.service in ignition"
+  zcat images/ignition.img | cpio -idmv --no-absolute-filenames
+  sed -i 's/\"name\":\"local-registry.service\"/\"enabled\":true,\"name\":\"local-registry.service\"/g' config.ign
+  popd || exit 1
+  rm -f agent.custom.iso
+  log_info "${func_name}" "Embed ignition into agent.custom.iso"
+  coreos-installer iso ignition embed -i extracted/config.ign -f -o agent.custom.iso agent.x86_64.iso
+  log_info "${func_name}" "Running: isohybrid"
+  isohybrid agent.custom.iso
+  mv agent.custom.iso "$POC_DIR"/iso
 }
 
 log_info iso1_generator "iso3_generator start"
