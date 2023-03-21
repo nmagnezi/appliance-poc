@@ -24,7 +24,7 @@ coreos-installer iso customize \
   -o $POC_DIR/agent.config.iso \
   ~/.cache/agent/image_cache/coreos-x86_64.iso
 
-echo "Done generating agent.config.iso"
+log_info "$build_iso.sh" "Done generating $POC_DIR/agent.config.iso"
 EOL
 
 
