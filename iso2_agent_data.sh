@@ -11,7 +11,7 @@
 source appliance_config.sh
 
 # create cat imageset-config.yaml
-read -r -d '' imageset-config << EOL
+read -r -d '' imageset_config << EOL
 apiVersion: mirror.openshift.io/v1alpha2
 kind: ImageSetConfiguration
 mirror:
@@ -50,7 +50,7 @@ function iso2_generator_main() {
   skopeo copy --all docker://"$ASSISTED_SERVICE_IMAGE" dir:"$POC_DIR"/assets/images/ose-agent-installer-api-server
 
   log_info "${func_name}" "Generating imageset-config.yaml at $POC_DIR/assets/"
-  echo "${imageset-config}" > "$POC_DIR"/assets/imageset-config.yaml
+  echo "${imageset_config}" > "$POC_DIR"/assets/imageset-config.yaml
   pushd "$POC_DIR" || exit 1
   pushd assets/ || exit 1
   log_info "${func_name}" "Copy mirror_seq1_000000.tar to oc-mirror directory"

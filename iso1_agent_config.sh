@@ -36,7 +36,7 @@ EOL
 read -r -d '' create_ign << EOL
 #!/usr/bin/env bash
 
-SSH_PUB_KEY='$(cat ~/.ssh/id_rsa.pub)'
+source ../appliance_config.sh
 
 butane --pretty --strict --files-dir .  << EOF > config.ign
 variant: fcos
