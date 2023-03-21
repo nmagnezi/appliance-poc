@@ -1,10 +1,13 @@
 #!/bin/bash
 
-
 # ISO 1 image for factory: agent.config.iso (bootable)
 # ====================================================
 # Image is based on coreos-x86_64.iso
-#
+# Creates ‘agentdata’ partition on /dev/sdb (via ignition)
+# Runs a local registry
+# Pushes oc-mirror to the local registry
+# Pushes custom images to the local registry: service/installer-agent
+# Copies agent ISO to /dev/sdc
 
 
 source appliance_config.sh
@@ -166,7 +169,7 @@ dd if=/dev/sr2 of=/dev/sdc status=progress conv="fsync"
 printf '\\e{lightgreen}Done! Please reboot system from /dev/sdc\n\\e{reset}' | set_issue "${status_issue}"
 EOL
 
-function main() {
+function iso1_generator_main() {
   func_name=${FUNCNAME[0]}
   appliance_config=$(cat appliance_config.sh)
 
@@ -193,5 +196,5 @@ function main() {
 }
 
 log_info iso1_generator "iso1_generator start"
-main
+iso1_generator_main
 log_info iso1_generator "iso1_generator end"
