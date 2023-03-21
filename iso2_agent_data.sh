@@ -53,12 +53,12 @@ function iso2_generator_main() {
   echo "${imageset-config}" > "$POC_DIR"/assets/imageset-config.yaml
   pushd "$POC_DIR" || exit 1
   pushd assets/ || exit 1
-  log_info "${func_name}" "Copy mirror_seq1_000000.tar  to oc-mirror directory"
+  log_info "${func_name}" "Copy mirror_seq1_000000.tar to oc-mirror directory"
   cp archives/mirror_seq1_000000.tar ./oc-mirror
   popd || exit 1
   log_info "${func_name}" "Run genisoimage on agent.data.iso"
-  genisoimage -o agent.data.iso -allow-limited-size assets
-  log_info "${func_name}" "Done generating $POC_DIR/agent.data.iso"
+  genisoimage -o iso/agent.data.iso -allow-limited-size assets
+  log_info "${func_name}" "Done generating $POC_DIR/iso/agent.data.iso"
 }
 
 log_info iso1_generator "iso2_generator start"

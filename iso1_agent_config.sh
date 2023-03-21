@@ -24,10 +24,10 @@ rm -rf $POC_DIR/agent.config.iso
 
 coreos-installer iso customize \
   --live-ignition config.ign \
-  -o $POC_DIR/agent.config.iso \
+  -o $POC_DIR/iso/agent.config.iso \
   ~/.cache/agent/image_cache/coreos-x86_64.iso
 
-log_info "build_iso.sh" "Done generating $POC_DIR/agent.config.iso"
+log_info "build_iso.sh" "Done generating $POC_DIR/iso/agent.config.iso"
 EOL
 
 
@@ -174,6 +174,7 @@ function iso1_generator_main() {
   appliance_config=$(cat appliance_config.sh)
 
   mkdir -p "$POC_DIR"/config
+  mkdir -p "$POC_DIR"/iso
   pushd "$POC_DIR"/config || exit 1
 
   log_info "${func_name}" "Generating appliance_config.sh in $POC_DIR"
