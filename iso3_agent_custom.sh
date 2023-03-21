@@ -10,7 +10,7 @@ source appliance_config.sh
 
 
 # create cat agent-config.yaml
-read -r -d '' agent-config << EOL
+read -r -d '' agent_config << EOL
 apiVersion: v1alpha1
 metadata:
   name: appliance
@@ -33,7 +33,7 @@ hosts:
 EOL
 
 # create cat install-config.yaml
-read -r -d '' install-config << EOL
+read -r -d '' install_config << EOL
 apiVersion: v1
 baseDomain: appliance.com
 imageContentSources:
@@ -75,8 +75,8 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {}
-pullSecret: $PULL_SECRET
-sshKey: $SSH_PUB_KEY
+pullSecret: '$PULL_SECRET'
+sshKey: '$SSH_PUB_KEY'
 EOL
 
 function iso3_generator_main() {
@@ -97,10 +97,10 @@ function iso3_generator_main() {
   pushd appliance || exit 1
 
   log_info "${func_name}" "Generating agent-config.yaml at $POC_DIR/appliance/"
-  echo "${agent-config}" > "$POC_DIR"/appliance/agent-config.yaml
+  echo "${agent_config}" > "$POC_DIR"/appliance/agent-config.yaml
 
   log_info "${func_name}" "Generating install-config.yaml at $POC_DIR/appliance/"
-  echo "${agent-config}" > "$POC_DIR"/appliance/install-config.yaml
+  echo "${install_config}" > "$POC_DIR"/appliance/install-config.yaml
 }
 
 log_info iso1_generator "iso3_generator start"
