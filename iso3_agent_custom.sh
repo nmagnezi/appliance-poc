@@ -39,19 +39,19 @@ baseDomain: appliance.com
 imageContentSources:
   - source: quay.io/openshift-release-dev/ocp-release
     mirrors:
-      - registry.appliance.com/openshift/release-images
+      - registry.appliance.com:5000/openshift/release-images
   - source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
     mirrors:
-      - registry.appliance.com/openshift/release
+      - registry.appliance.com:5000/openshift/release
   - source: quay.io
     mirrors:
-      - registry.appliance.com
+      - registry.appliance.com:5000
   - source: registry.redhat.io/ubi8
     mirrors:
-      - registry.appliance.com/ubi8
+      - registry.appliance.com:5000/ubi8
   - source: registry.ci.openshift.org/ocp/release
     mirrors:
-      - registry.appliance.com/openshift/release-images
+      - registry.appliance.com:5000/openshift/release-images
 compute:
 - architecture: amd64
   hyperthreading: Enabled
