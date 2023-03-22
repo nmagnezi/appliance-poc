@@ -17,9 +17,9 @@ kind: ImageSetConfiguration
 mirror:
   platform:
     channels:
-      - name: stable-4.12
-        minVersion: 4.12.6
-        maxVersion: 4.12.6
+      - name: candidate-4.12
+        minVersion: 4.12.8
+        maxVersion: 4.12.8
   additionalImages:
     - name: registry.redhat.io/ubi8/ubi:latest
 EOL
