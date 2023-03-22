@@ -126,7 +126,7 @@ clear_issue() {
 EOL
 
 # create setup.sh
-read -r -d '' setup << EOL
+read -i text -d '' setup << EOL
 #!/bin/bash
 
 source issue_status.sh
@@ -157,16 +157,16 @@ cp -r /mnt/sr1/images /mnt/agentdata/
 skopeo copy dir:/mnt/sr1/images/ose-agent-installer-node-agent docker://0.0.0.0:5000/masayag/assisted-installer-agent:billi --dest-tls-verify=false
 skopeo copy dir:/mnt/sr1/images/ose-agent-installer-api-server docker://0.0.0.0:5000/nmagnezi/assisted-service:appliance2 --dest-tls-verify=false
 
-printf '\\e{yellow}Pushing OC mirror to a local registry...\n\\e{reset}' | set_issue "${status_issue}"
+printf '\\\\\\\e{yellow}Pushing OC mirror to a local registry...\\\n\\\\\\\e{reset}' | set_issue "\${status_issue}"
 cp /mnt/sr1/bin/oc-mirror /usr/local/bin/
 cd /usr/local/bin/
 chmod +x oc-mirror
 ./oc-mirror --from /mnt/sr1/oc-mirror/mirror_seq1_000000.tar docker://0.0.0.0:5000 --dest-use-http
 
-printf '\\e{yellow}Copying Agent ISO to /dev/sdc...\n\\e{reset}' | set_issue "${status_issue}"
+printf '\\\\\\\e{yellow}Copying Agent ISO to /dev/sdc...\\\n\\\\\\\e{reset}' | set_issue "\${status_issue}"
 dd if=/dev/sr2 of=/dev/sdc status=progress conv="fsync"
 
-printf '\\e{lightgreen}Done! Please reboot system from /dev/sdc\n\\e{reset}' | set_issue "${status_issue}"
+printf '\\\\\\\e{lightgreen}Done! Please reboot system from /dev/sdc\\\n\\\\\\\e{reset}' | set_issue "\${status_issue}"
 EOL
 
 function iso1_generator_main() {
