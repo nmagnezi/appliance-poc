@@ -154,8 +154,8 @@ podman run --privileged -d --name registry -p 5000:5000 -v /mnt/agentdata/regist
 cp -r /mnt/sr1/images /mnt/agentdata/
 
 # Push AI images to registry (just for testing, latest images should be in the release payload)
-skopeo copy dir:/mnt/sr1/images/ose-agent-installer-node-agent docker://0.0.0.0:5000/masayag/assisted-installer-agent:billi --dest-tls-verify=false
-skopeo copy dir:/mnt/sr1/images/ose-agent-installer-api-server docker://0.0.0.0:5000/nmagnezi/assisted-service:appliance2 --dest-tls-verify=false
+skopeo copy dir:/mnt/sr1/images/ose-agent-installer-node-agent docker://0.0.0.0:5000/$ASSISTED_INSTALLER_AGENT_IMAGE --dest-tls-verify=false
+skopeo copy dir:/mnt/sr1/images/ose-agent-installer-api-server docker://0.0.0.0:5000/$ASSISTED_SERVICE_IMAGE --dest-tls-verify=false
 
 printf '\\\\\\\e{yellow}Pushing OC mirror to a local registry...\\\n\\\\\\\e{reset}' | set_issue "\${status_issue}"
 cp /mnt/sr1/bin/oc-mirror /usr/local/bin/
