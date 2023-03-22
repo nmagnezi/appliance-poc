@@ -14,6 +14,7 @@ source appliance_config.sh
 read -r -d '' imageset_config << EOL
 apiVersion: mirror.openshift.io/v1alpha2
 kind: ImageSetConfiguration
+archiveSize: 4
 mirror:
   platform:
     channels:
@@ -55,10 +56,10 @@ function iso2_generator_main() {
   pushd assets/ || exit 1
   oc-mirror --config imageset-config.yaml file://archives
   log_info "${func_name}" "Copy mirror_seq1_000000.tar to oc-mirror directory"
-  cp archives/mirror_seq1_000000.tar ./oc-mirror
+  cp archives/* ./oc-mirror
   popd || exit 1
   log_info "${func_name}" "Run genisoimage on agent.data.iso"
-  genisoimage -o iso/agent.data.iso -allow-limited-size assets
+  genisoimage -o iso/agent.data.iso assets
   log_info "${func_name}" "Done generating $POC_DIR/iso/agent.data.iso"
 }
 
