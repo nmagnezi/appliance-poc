@@ -161,7 +161,7 @@ printf '\\\\\\\e{yellow}Pushing OC mirror to a local registry...\\\n\\\\\\\e{res
 cp /mnt/sr1/bin/oc-mirror /usr/local/bin/
 cd /usr/local/bin/
 chmod +x oc-mirror
-./oc-mirror --from /mnt/sr1/oc-mirror/mirror_seq1_000000.tar docker://0.0.0.0:5000 --dest-use-http
+./oc-mirror --from /mnt/sr1/oc-mirror docker://0.0.0.0:5000 --dest-use-http
 
 printf '\\\\\\\e{yellow}Copying Agent ISO to /dev/sdc...\\\n\\\\\\\e{reset}' | set_issue "\${status_issue}"
 dd if=/dev/sr2 of=/dev/sdc status=progress conv="fsync"
