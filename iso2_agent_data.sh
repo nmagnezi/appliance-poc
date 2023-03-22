@@ -44,9 +44,12 @@ function iso2_generator_main() {
   cp "$(which butane)" "$POC_DIR"/assets/bin
 
   log_info "${func_name}" "Copy (via skopeo) local registry: $REGISTRY_IMAGE to $POC_DIR/assets/images/registry.tar:registry:2"
+  rm -rf $POC_DIR/assets/images/registry.tar
   skopeo copy docker://"$REGISTRY_IMAGE" docker-archive:"$POC_DIR"/assets/images/registry.tar:registry:2
+
   log_info "${func_name}" "Copy (via skopeo) assisted-installer-agent: $ASSISTED_INSTALLER_AGENT_IMAGE to $POC_DIR/assets/images/ose-agent-installer-node-agent"
   skopeo copy --all docker://"$ASSISTED_INSTALLER_AGENT_IMAGE" dir:"$POC_DIR"/assets/images/ose-agent-installer-node-agent
+
   log_info "${func_name}" "Copy (via skopeo) assisted-service: $ASSISTED_INSTALLER_AGENT_IMAGE to $POC_DIR/assets/images/ose-agent-installer-api-server"
   skopeo copy --all docker://"$ASSISTED_SERVICE_IMAGE" dir:"$POC_DIR"/assets/images/ose-agent-installer-api-server
 
