@@ -8,6 +8,7 @@ export OCP_INSTALLER_REPO=${OCP_INSTALLER_REPO:-'https://github.com/danielerez/i
 export OCP_INSTALLER_BRANCH=${OCP_INSTALLER_BRANCH:-'appliance'}
 export SSH_PUB_KEY=$(cat $HOME/.ssh/id_rsa.pub)
 export PULL_SECRET=$(cat $HOME/pull-secret)
+export SKIP_OC_MIRROR=${SKIP_OC_MIRROR:-false}
 
 function log() {
   echo "$(date '+%F %T') $2[$$]: level=$1 msg=\"$3\""
