@@ -10,7 +10,7 @@
 
 source appliance_config.sh
 
-# create cat imageset-config.yaml
+# create imageset-config.yaml
 read -r -d '' imageset_config << EOL
 apiVersion: mirror.openshift.io/v1alpha2
 kind: ImageSetConfiguration
@@ -18,9 +18,9 @@ archiveSize: 4
 mirror:
   platform:
     channels:
-      - name: candidate-4.12
-        minVersion: 4.12.8
-        maxVersion: 4.12.8
+      - name: $CHANNEL_NAME
+        minVersion: $CHANNEL_MIN_VERSION
+        maxVersion: $CHANNEL_MAX_VERSION
   additionalImages:
     - name: registry.redhat.io/ubi8/ubi:latest
 EOL
