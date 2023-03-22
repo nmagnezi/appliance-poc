@@ -20,7 +20,7 @@ source ../appliance_config.sh
 
 ./create_ign.sh
 
-rm -rf $POC_DIR/agent.config.iso
+rm -rf $POC_DIR/iso/agent.config.iso
 
 coreos-installer iso customize \
   --live-ignition config.ign \
