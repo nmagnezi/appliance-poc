@@ -53,6 +53,7 @@ function iso2_generator_main() {
   echo "${imageset_config}" > "$POC_DIR"/assets/imageset-config.yaml
   pushd "$POC_DIR" || exit 1
   pushd assets/ || exit 1
+  oc-mirror --config imageset-config.yaml file://archives
   log_info "${func_name}" "Copy mirror_seq1_000000.tar to oc-mirror directory"
   cp archives/mirror_seq1_000000.tar ./oc-mirror
   popd || exit 1
