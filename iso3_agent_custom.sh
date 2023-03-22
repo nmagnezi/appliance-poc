@@ -93,6 +93,7 @@ function iso3_generator_main() {
   log_info "${func_name}" "Copying the modified openshift-install binary to /usr/local/bin"
   /usr/bin/cp -f bin/openshift-install /usr/local/bin/
   popd || exit 1
+  rm -rf "$POC_DIR"/appliance 
   mkdir "$POC_DIR"/appliance
   pushd appliance || exit 1
 
