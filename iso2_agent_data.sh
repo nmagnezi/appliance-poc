@@ -65,7 +65,7 @@ function iso2_generator_main() {
   fi
   popd || exit 1
   log_info "${func_name}" "Run genisoimage on agent.data.iso"
-  genisoimage -o iso/agent.data.iso assets
+  genisoimage -J -r -joliet-long -o iso/agent.data.iso assets
   log_info "${func_name}" "Done generating $POC_DIR/iso/agent.data.iso"
 }
 
