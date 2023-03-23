@@ -4,7 +4,7 @@ export POC_DIR=${POC_DIR:-$HOME/appliance-poc-assets}
 
 export REGISTRY_IMAGE=${REGISTRY_IMAGE:-'quay.io/libpod/registry:2.8'}
 export ASSISTED_INSTALLER_AGENT_IMAGE=${ASSISTED_INSTALLER_AGENT_IMAGE:-'quay.io/masayag/assisted-installer-agent@sha256:93afd3965abb3b1019d001a096280e4f012843f734e6d5851f0bac743f4ffaa3'}
-export ASSISTED_SERVICE_IMAGE=${ASSISTED_SERVICE_IMAGE:-'quay.io/nmagnezi/assisted-service@sha256:5bf871a7109b647a5ec6f58d545ad6156bfcc27377a5a66357a7b369ebbe450c'}
+export ASSISTED_SERVICE_IMAGE=${ASSISTED_SERVICE_IMAGE:-'quay.io/nmagnezi/assisted-service@sha256:d8190195889efb5333eeec18af9b6c82313edd4db62989bd3a357caca4f13f0e'}
 
 export OCP_INSTALLER_REPO=${OCP_INSTALLER_REPO:-'https://github.com/danielerez/installer.git'}
 export OCP_INSTALLER_BRANCH=${OCP_INSTALLER_BRANCH:-'appliance'}
