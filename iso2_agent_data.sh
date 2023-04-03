@@ -61,7 +61,8 @@ function iso2_generator_main() {
   if [ "${SKIP_OC_MIRROR}" = "false" ]; then
     oc-mirror --config imageset-config.yaml file://archives
     log_info "${func_name}" "Copy mirror_seq1_000000.tar to oc-mirror directory"
-    cp archives/* ./oc-mirror
+    mv archives/* ./oc-mirror
+    rm -f archives
   fi
   popd || exit 1
   log_info "${func_name}" "Run genisoimage on agent.data.iso"
